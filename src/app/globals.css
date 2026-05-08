@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────────────── */
+:root {
+  --color-bg: #05050f;
+  --color-surface: #0d0d1a;
+  --color-surface-2: #11111f;
+  --color-border: rgba(255, 255, 255, 0.07);
+  --color-blue: #3b82f6;
+  --color-blue-light: #60a5fa;
+  --color-blue-glow: rgba(59, 130, 246, 0.15);
+  --color-cyan: #06b6d4;
+  --color-text: #e2e8f0;
+  --color-muted: #64748b;
+  --color-muted-2: #94a3b8;
+}
+
+/* ── Base layer — sits BELOW @layer utilities in the cascade ────── */
+@layer base {
+  /*
+   * IMPORTANT: This reset MUST be inside @layer base.
+   * In Tailwind v4 all utilities live in @layer utilities which has
+   * higher cascade priority than @layer base, so utilities like
+   * py-32 / mx-auto / mb-20 correctly override this reset.
+   * If this block is placed outside any layer it becomes "unlayered"
+   * and beats ALL layered rules — breaking every padding/margin utility.
+   */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Use clip (not hidden) — hidden creates a scroll container that
+       breaks framer-motion's useScroll measurements */
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-inter, "Inter", system-ui, sans-serif);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-width: 320px;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background: rgba(59, 130, 246, 0.3);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.35);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.65);
+  }
+
+  /*
+   * Do NOT include svg here — setting display:block on SVG breaks
+   * Lucide icon alignment when icons are used inline inside flex rows.
+   */
+  img,
+  video,
+  canvas {
+    max-width: 100%;
+    display: block;
+  }
+}
+
+/* ── Custom animations (not in a layer so they're always available) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

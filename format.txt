@@ -1,0 +1,121 @@
+I want you to act as a senior UI/UX designer and frontend developer.
+
+Create a modern, highly interactive portfolio website for a tech company that provides web development and design services.
+
+Design Style & Theme:
+- Dark theme (black / dark grey base)
+- Subtle dark bluish gradient accents
+- Clean, minimal, futuristic tech aesthetic
+- Smooth animations and transitions (no heavy or distracting motion)
+- Fully responsive
+
+IMPORTANT:
+I like the "green hero section" style from modern portfolio videos — clean, minimal, slightly glowing, tech-inspired UI. Recreate a similar feel but make it unique and more suitable for a web development agency.
+
+-----------------------------------
+
+1. HERO SECTION (Very Important)
+- Full screen hero section
+- Modern tech-focused layout
+- Include:
+  - Strong headline (e.g. "We Build Digital Experiences")
+  - Short description
+  - CTA button (e.g. "View Work", "Get Started")
+- Add subtle animation (floating elements, gradient glow, or moving shapes)
+- Should feel interactive and premium
+- Use bluish glow instead of green but keep that same clean vibe
+
+-----------------------------------
+
+2. ABOUT US SECTION
+- Clean and minimal layout
+- Include:
+  - Short company intro
+  - Mission or vision
+  - Highlight expertise (web dev, UI/UX, scalable solutions)
+- Add subtle animation on scroll (fade-up or slide-in)
+
+-----------------------------------
+
+3. OUR WORK (PORTFOLIO SECTION)
+- Vertical scrolling layout like timeline
+- Left side: vertical progress line/indicator
+- Projects appear one by one while scrolling
+
+Each project card:
+- Large image (default: black & white)
+- On hover: image becomes colored
+- Minimal hover animation (zoom or fade)
+- Include:
+  - Project title
+  - Category
+  - Short description
+  - Small arrow button/icon
+
+- Smooth scroll-triggered animations
+
+-----------------------------------
+
+4. WHAT WE DO
+- Services section
+- Show 4–6 services (e.g. Web Development, UI/UX Design, E-commerce, SaaS)
+- Use cards or grid layout
+- Add hover effects (glow, border animation, slight lift)
+
+-----------------------------------
+
+5. HOW WE WORK
+- Step-by-step process section
+- Example:
+  1. Research
+  2. Planning
+  3. Design
+  4. Development
+  5. Launch
+- Use horizontal or vertical step design
+- Add smooth animation when scrolling
+
+-----------------------------------
+
+6. INDUSTRIES WE SERVE
+- Display industries (e.g. E-commerce, Healthcare, Startups, SaaS, Education)
+- Use clean icons or minimal cards
+- Keep it visually consistent with dark theme
+
+-----------------------------------
+
+7. CONTACT US
+- Modern contact form
+- Fields:
+  - Name
+  - Email
+  - Message
+- CTA button
+- Add subtle animation (focus effects, hover glow)
+
+-----------------------------------
+
+GLOBAL REQUIREMENTS:
+- Smooth scrolling across entire site
+- Use modern animations (Framer Motion or CSS transitions)
+- Keep everything minimal and premium (avoid clutter)
+- Use proper spacing and typography
+- Add subtle glowing effects (blue tones)
+- Performance optimized
+
+-----------------------------------
+
+TECH STACK (IMPORTANT):
+- Use React (preferably Next.js)
+- Tailwind CSS for styling
+- Framer Motion for animations
+
+-----------------------------------
+
+OUTPUT:
+- Provide clean, production-level code
+- Component-based structure
+- Well-organized and readable
+- No unnecessary comments
+
+Make it look like a premium agency website similar to award-winning portfolios.
