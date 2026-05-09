@@ -80,9 +80,8 @@ export default function Services() {
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             Our Services
           </h2>
-          <p className="text-slate-400 max-w-xl mx-auto">
-            End-to-end digital solutions tailored for startups, scale-ups, and
-            enterprises.
+          <p className="text-slate-400 max-w-3xl mx-auto text-lg sm:text-xl leading-relaxed font-medium">
+            We deliver end-to-end digital solutions tailored for ambitious startups, forward-thinking scale-ups, and industry-leading enterprises. By seamlessly bridging the gap between innovative, user-centric design and robust, scalable development, we transform complex business challenges into elegant, high-performing digital realities.
           </p>
         </motion.div>
 

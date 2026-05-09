@@ -71,38 +71,37 @@ function Card({
   range: number[];
   targetScale: number;
 }) {
-  const containerRef = useRef(null);
   const scale = useTransform(progress, range, [1, targetScale]);
-  const opacity = useTransform(progress, range, [1, 0.5]);
+  const opacity = useTransform(progress, range, [1, 0.7]);
 
   return (
-    <div className="w-full relative z-10 flex items-center justify-center">
+    <div className="w-full relative z-10 flex items-center justify-center pt-24 sm:pt-32">
       <motion.div
         style={{
           scale,
           opacity,
-          top: `calc(5vh + ${i * 30}px)`,
+          top: `calc(10vh + ${i * 20}px)`,
         }}
-        className={`relative w-full max-w-5xl rounded-3xl overflow-hidden border border-slate-400/20 bg-[#0a0a1a]/80 backdrop-blur-xl p-6 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.5)]`}
+        className="relative w-full max-w-5xl rounded-[2.5rem] overflow-hidden border border-white/10 bg-[#0a0a1a]/90 backdrop-blur-2xl p-6 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
       >
         {/* Background Glow */}
         <div
-          className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30 pointer-events-none`}
+          className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20 pointer-events-none`}
         />
 
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
           {/* Text Content */}
-          <div className="flex flex-col gap-5 order-2 md:order-1">
-            <div className="inline-flex w-fit items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-xs font-semibold tracking-wide uppercase text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+          <div className="flex flex-col gap-6 order-2 md:order-1">
+            <div className="inline-flex w-fit items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-[10px] font-bold tracking-[0.2em] uppercase text-blue-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
               {project.category}
             </div>
 
-            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-[1.1]">
               {project.title}
             </h3>
 
-            <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-md">
+            <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-md font-medium">
               {project.description}
             </p>
 
@@ -110,38 +109,39 @@ function Card({
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 bg-white/[0.04] text-slate-300"
+                  className="px-3 py-1.5 rounded-xl text-xs font-semibold border border-white/5 bg-white/[0.03] text-slate-400"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            <a 
+            <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 relative z-50 w-fit inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/10 bg-white/[0.05] backdrop-blur-xl text-white font-semibold text-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.1] hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] group overflow-hidden"
+              className="mt-6 relative z-50 w-fit inline-flex items-center gap-3 px-8 py-4 rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl text-white font-bold text-sm transition-all duration-500 hover:-translate-y-1.5 hover:bg-white/[0.08] hover:border-white/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] group overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-out" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-out" />
               <span className="relative z-10 flex items-center gap-2">
-                View Project
+                Launch Project
                 <ArrowUpRight
-                  size={18}
-                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                  size={20}
+                  className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
                 />
               </span>
             </a>
           </div>
 
           {/* Image Container */}
-          <div className="order-1 md:order-2 h-[250px] sm:h-[350px] md:h-[450px] w-full rounded-2xl overflow-hidden relative border border-white/10 bg-black/40 group">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="order-1 md:order-2 h-[280px] sm:h-[380px] md:h-[480px] w-full rounded-[2rem] overflow-hidden relative border border-white/10 bg-black/40 group shadow-2xl">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
             <Image
               src={project.image}
               alt={project.title}
               fill
-              className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              className="object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-110"
+              priority={i === 0}
             />
           </div>
         </div>
@@ -152,6 +152,7 @@ function Card({
 
 export default function Projects() {
   const [activeTab, setActiveTab] = useState("All");
+  const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Filter projects based on active tab
@@ -167,41 +168,41 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative isolate py-24 sm:py-32 px-4 sm:px-6 bg-[#03030a]"
+      ref={sectionRef}
+      className="relative py-24 sm:py-32 px-4 sm:px-6 bg-[#03030a] min-h-screen"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* Header & Tabs */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 sm:mb-24">
-          <div className="max-w-2xl">
-            <p className="text-sm font-semibold tracking-widest uppercase text-blue-400 mb-3">
-              Our Portfolio
-            </p>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
-              Selected Works
-            </h2>
-            <p className="text-slate-400 text-lg">
-              We engineer scalable platforms and design premium digital experiences
-              that drive real business results.
-            </p>
-          </div>
+      <div className="max-w-7xl mx-auto relative">
+        {/* Header */}
+        <div className="max-w-3xl mb-16 sm:mb-24 text-center mx-auto">
+          <p className="text-xs font-bold tracking-[0.3em] uppercase text-blue-500 mb-4">
+            Featured Projects
+          </p>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight">
+            Selected <span className="text-slate-500 italic font-light">Works</span>
+          </h2>
+          <p className="text-slate-400 text-lg sm:text-xl max-w-3xl mx-auto font-medium leading-relaxed">
+            Explore a curated showcase of our most defining digital products. Every project in this collection represents our unwavering commitment to pixel-perfect design and sophisticated engineering. These selected works are more than just websites; they are powerful digital assets that have successfully accelerated growth, engaged users, and redefined industry standards for our visionary clients.
+          </p>
+        </div>
 
-          {/* Tabs */}
-          <div className="flex items-center gap-1 p-1.5 rounded-2xl bg-white/[0.03] border border-white/[0.08] w-fit">
+        {/* Sticky Tabs Container */}
+        <div className="sticky top-24 z-[110] flex justify-center w-full mb-12 sm:mb-20 px-4">
+          <div className="p-1.5 rounded-2xl bg-[#0a0a1a]/90 backdrop-blur-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex items-center gap-1">
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`relative px-5 py-2.5 rounded-xl text-sm font-medium transition-colors duration-300 ${
+                className={`relative px-6 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition-all duration-500 ${
                   activeTab === tab
                     ? "text-white"
-                    : "text-slate-400 hover:text-slate-200"
+                    : "text-slate-500 hover:text-slate-300"
                 }`}
               >
                 {activeTab === tab && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-0 bg-white/10 border border-white/10 rounded-xl"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    className="absolute inset-0 bg-blue-600/10 border border-blue-500/20 rounded-xl"
+                    transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
                   />
                 )}
                 <span className="relative z-10">{tab}</span>
@@ -211,19 +212,18 @@ export default function Projects() {
         </div>
 
         {/* Sticky Stack Cards Container */}
-        <div ref={containerRef} className="relative mt-10 flex flex-col">
-          <AnimatePresence mode="wait">
+        <div ref={containerRef} className="relative flex flex-col items-center">
+          <AnimatePresence mode="popLayout">
             {filteredProjects.length > 0 ? (
               filteredProjects.map((project, i) => {
-                const targetScale = 1 - (filteredProjects.length - i) * 0.04;
+                const targetScale = 1 - (filteredProjects.length - i) * 0.05;
                 return (
                   <motion.div
-                    key={project.id}
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.5 }}
-                    className="sticky top-0 h-screen flex items-center justify-center w-full"
+                    key={`${activeTab}-${project.id}`}
+                    initial={{ opacity: 0, scale: 0.9, y: 100 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
+                    className="sticky top-0 min-h-screen flex items-start justify-center w-full"
                     style={{ zIndex: i }}
                   >
                     <Card
@@ -240,10 +240,9 @@ export default function Projects() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="w-full py-32 flex flex-col items-center justify-center border border-white/10 rounded-3xl bg-white/[0.02]"
+                className="w-full py-32 flex flex-col items-center justify-center border border-white/10 rounded-[2.5rem] bg-white/[0.02] backdrop-blur-sm"
               >
-                <p className="text-slate-400 text-lg">
+                <p className="text-slate-500 text-lg font-medium">
                   No projects available in this category yet.
                 </p>
               </motion.div>

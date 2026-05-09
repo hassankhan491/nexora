@@ -82,21 +82,20 @@ export default function About() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           variants={fadeUp}
-          className="mb-16"
+          className="mb-16 flex flex-col items-center"
         >
-          <p className="text-sm font-semibold tracking-widest uppercase text-blue-400 mb-3">
+          <p className="text-sm font-semibold tracking-widest uppercase text-blue-400 mb-3 text-center">
             About Us
           </p>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <h2 className="text-4xl sm:text-5xl font-bold text-white leading-tight max-w-xl">
+          <div className="flex flex-col items-center text-center gap-8 mb-4">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight max-w-4xl">
               We Turn Ideas Into{" "}
               <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 Impactful Products
               </span>
             </h2>
-            <p className="text-slate-400 max-w-sm leading-relaxed md:text-right">
-              Our mission is simple — build digital products that look stunning,
-              perform flawlessly, and help businesses grow.
+            <p className="text-slate-400 max-w-3xl text-lg sm:text-xl leading-relaxed font-medium">
+              At Nexora, our mission transcends standard development; we architect digital experiences that command attention. We are driven by a profound passion for high-end, sophisticated design and anchored by an uncompromising commitment to technical excellence. Every interface we craft and every system we build is meticulously engineered to elevate your brand, merging visionary aesthetics with scalable, enterprise-grade performance.
             </p>
           </div>
         </motion.div>
