@@ -49,16 +49,17 @@ const techStack = [
 //   }),
 // };
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
-  visible: {
+  visible: (i: number) => ({ // Ye line dhyan se dekhen, function banaya hai
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut",
+      delay: i * 0.1, // Ab 'i' yahan sahi kaam karega
+      ease: [0.25, 0.1, 0.25, 1],
     },
-  },
+  }),
 };
 
 export default function About() {
