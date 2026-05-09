@@ -75,12 +75,12 @@ function Card({
   const opacity = useTransform(progress, range, [1, 0.7]);
 
   return (
-    <div className="w-full relative z-10 flex items-center justify-center pt-24 sm:pt-32">
+    <div className="w-full relative z-10 flex items-center justify-center pt-8 sm:pt-32">
       <motion.div
         style={{
           scale,
           opacity,
-          top: `calc(10vh + ${i * 20}px)`,
+          top: `calc(5vh + ${i * 20}px)`,
         }}
         className="relative w-full max-w-5xl rounded-[2.5rem] overflow-hidden border border-white/10 bg-[#0a0a1a]/90 backdrop-blur-2xl p-6 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
       >
@@ -91,7 +91,7 @@ function Card({
 
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
           {/* Text Content */}
-          <div className="flex flex-col gap-6 order-2 md:order-1">
+          <div className="flex flex-col gap-3 sm:gap-6 order-2 md:order-1">
             <div className="inline-flex w-fit items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-[10px] font-bold tracking-[0.2em] uppercase text-blue-400">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
               {project.category}
@@ -101,11 +101,11 @@ function Card({
               {project.title}
             </h3>
 
-            <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-md font-medium">
+            <p className="text-slate-400 text-base leading-relaxed max-w-md font-medium">
               {project.description}
             </p>
 
-            <div className="flex flex-wrap gap-2 mt-2">
+            <div className="hidden sm:flex flex-wrap gap-2 mt-2">
               {project.tags.map((tag) => (
                 <span
                   key={tag}
@@ -120,7 +120,7 @@ function Card({
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 relative z-50 w-fit inline-flex items-center gap-3 px-8 py-4 rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl text-white font-bold text-sm transition-all duration-500 hover:-translate-y-1.5 hover:bg-white/[0.08] hover:border-white/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] group overflow-hidden"
+              className="mt-2 sm:mt-6 relative z-50 w-fit inline-flex items-center gap-3 px-6 py-3 sm:px-8 sm:py-4 rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl text-white font-bold text-sm transition-all duration-500 hover:-translate-y-1.5 hover:bg-white/[0.08] hover:border-white/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] group overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-out" />
               <span className="relative z-10 flex items-center gap-2">
@@ -134,7 +134,7 @@ function Card({
           </div>
 
           {/* Image Container */}
-          <div className="order-1 md:order-2 h-[280px] sm:h-[380px] md:h-[480px] w-full rounded-[2rem] overflow-hidden relative border border-white/10 bg-black/40 group shadow-2xl">
+          <div className="order-1 md:order-2 h-[240px] sm:h-[380px] md:h-[480px] w-full rounded-[2rem] overflow-hidden relative border border-white/10 bg-black/40 group shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
             <Image
               src={project.image}
@@ -169,7 +169,7 @@ export default function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative py-24 sm:py-32 px-4 sm:px-6 bg-[#03030a] min-h-screen"
+      className="relative py-12 sm:py-32 px-4 sm:px-6 bg-[#03030a] min-h-screen"
     >
       <div className="max-w-7xl mx-auto relative">
         {/* Header */}
@@ -180,13 +180,13 @@ export default function Projects() {
           <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight">
             Selected <span className="text-slate-500 italic font-light">Works</span>
           </h2>
-          <p className="text-slate-400 text-lg sm:text-xl max-w-3xl mx-auto font-medium leading-relaxed">
+          <p className="text-slate-400 text-base max-w-3xl mx-auto font-medium leading-relaxed">
             Explore a curated showcase of our most defining digital products. Every project in this collection represents our unwavering commitment to pixel-perfect design and sophisticated engineering. These selected works are more than just websites; they are powerful digital assets that have successfully accelerated growth, engaged users, and redefined industry standards for our visionary clients.
           </p>
         </div>
 
         {/* Sticky Tabs Container */}
-        <div className="sticky top-24 z-[110] flex justify-center w-full mb-12 sm:mb-20 px-4">
+        <div className="sticky top-20 z-[110] flex justify-center w-full mb-6 sm:mb-20 px-4">
           <div className="p-1.5 rounded-2xl bg-[#0a0a1a]/90 backdrop-blur-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex items-center gap-1">
             {tabs.map((tab) => (
               <button

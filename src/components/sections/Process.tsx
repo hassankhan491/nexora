@@ -66,7 +66,7 @@ export default function Process() {
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             Our Process
           </h2>
-          <p className="text-slate-400 max-w-xl mx-auto">
+          <p className="text-slate-400 max-w-xl mx-auto text-base">
             A transparent, battle-tested workflow that delivers great outcomes —
             every time.
           </p>

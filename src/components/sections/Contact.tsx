@@ -73,7 +73,7 @@ export default function Contact() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
             Let&apos;s Build Something
           </h2>
-          <p className="text-slate-400 max-w-xl mx-auto">
+          <p className="text-slate-400 max-w-xl mx-auto text-base">
             Have a project in mind? Tell us about it and we&apos;ll get back to you
             within 24 hours.
           </p>

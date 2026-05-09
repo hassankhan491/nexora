@@ -104,7 +104,7 @@ export default function Industries() {
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             Industries We Serve
           </h2>
-          <p className="text-slate-400 max-w-xl mx-auto">
+          <p className="text-slate-400 max-w-xl mx-auto text-base">
             We&apos;ve built products across a wide range of industries — each
             with its own unique challenges and standards.
           </p>

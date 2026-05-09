@@ -65,7 +65,7 @@ export default function Testimonials() {
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             What Our Clients Say
           </h2>
-          <p className="text-slate-400 max-w-xl mx-auto">
+          <p className="text-slate-400 max-w-xl mx-auto text-base">
             We measure our success by the results we create for the businesses
             we work with.
           </p>

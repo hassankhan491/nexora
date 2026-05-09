@@ -94,7 +94,7 @@ export default function About() {
                 Impactful Products
               </span>
             </h2>
-            <p className="text-slate-400 max-w-3xl text-lg sm:text-xl leading-relaxed font-medium">
+            <p className="text-slate-400 max-w-3xl text-base leading-relaxed font-medium">
               At Nexora, our mission transcends standard development; we architect digital experiences that command attention. We are driven by a profound passion for high-end, sophisticated design and anchored by an uncompromising commitment to technical excellence. Every interface we craft and every system we build is meticulously engineered to elevate your brand, merging visionary aesthetics with scalable, enterprise-grade performance.
             </p>
           </div>
