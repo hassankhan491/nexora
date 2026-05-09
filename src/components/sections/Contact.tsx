@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { Send, Mail, MapPin, Clock } from "lucide-react";
 
 const info = [
-  { icon: Mail, label: "Email", value: "hello@nexorastudio.com" },
+  { icon: Mail, label: "Email", value: "nexorastudio205@gmail.com" },
   { icon: MapPin, label: "Location", value: "Available Worldwide" },
   { icon: Clock, label: "Response Time", value: "Within 24 hours" },
 ];
@@ -32,7 +32,7 @@ export default function Contact() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "eb4130e0-dc13-48e5-ad2e-c969ac5a97f9",
+          access_key: "9e91f04d-d911-4e42-856a-f52e373e80ac",
           name: form.name,
           email: form.email,
           message: form.message,

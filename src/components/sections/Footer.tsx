@@ -104,10 +104,10 @@ export default function Footer() {
             <ul className="flex flex-col gap-3">
               <li>
                 <a
-                  href="mailto:hello@nexorastudio.com"
+                  href="mailto:nexorastudio205@gmail.com"
                   className="text-sm text-slate-500 hover:text-slate-200 transition-colors duration-200"
                 >
-                  hello@nexorastudio.com
+                  nexorastudio205@gmail.com
                 </a>
               </li>
               <li>
