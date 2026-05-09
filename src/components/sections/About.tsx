@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import type { Variants } from "framer-motion"; //ye new line add ki thi
 import { Code2, Layers, Zap, Users } from "lucide-react";
 
 const stats = [
@@ -39,13 +40,25 @@ const techStack = [
   "Prisma", "PostgreSQL", "Figma", "Framer Motion", "Stripe", "AWS", "Vercel",
 ];
 
+// const fadeUp = {
+//   hidden: { opacity: 0, y: 40 },
+//   visible: (i: number) => ({
+//     opacity: 1,
+//     y: 0,
+//     transition: { duration: 0.6, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] },
+//   }),
+// };
+
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
+  visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] },
-  }),
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
 };
 
 export default function About() {
@@ -60,9 +73,13 @@ export default function About() {
 
       <div ref={ref} className="max-w-7xl mx-auto">
         <motion.div
+          // initial="hidden"
+          // animate={inView ? "visible" : "hidden"}
+          // custom={0}
+          // variants={fadeUp}
+          // className="mb-16"
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          custom={0}
           variants={fadeUp}
           className="mb-16"
         >
