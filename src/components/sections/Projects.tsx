@@ -1,280 +1,245 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
-const projects = [
+const tabs = ["All", "Development", "Designing"];
+
+const projectsData = [
   {
-    title: "Luminary — SaaS Dashboard",
-    category: "SaaS / Web App",
+    id: 1,
+    title: "Gsc Gradient",
+    category: "Development",
     description:
-      "A multi-tenant analytics dashboard with real-time data visualisation, role-based access, and a clean design system built for scale.",
+      "A comprehensive educational platform connecting scholars globally with real-time features, interactive modules, and deep analytics built for massive scale.",
     tags: ["Next.js", "TypeScript", "Prisma", "TailwindCSS"],
-    color: "from-blue-900/60 to-indigo-900/60",
-    accent: "#3b82f6",
-    bars: [65, 80, 50, 90, 70],
+    image: "/GSC-gradient.png",
+    color: "from-blue-500/20 to-indigo-500/20",
+    border: "border-blue-500/20",
   },
   {
-    title: "Shopfront — E-commerce Platform",
-    category: "E-commerce",
+    id: 2,
+    title: "Idiom Similies App",
+    category: "Development",
     description:
-      "A fully custom e-commerce experience with headless CMS integration, smooth checkout flow, and a 40% improvement in conversion rate.",
-    tags: ["React", "Shopify", "Node.js", "Stripe"],
-    color: "from-cyan-900/60 to-teal-900/60",
-    accent: "#06b6d4",
-    bars: [45, 70, 85, 55, 95],
+      "An intuitive and beautifully designed web application helping students learn English idioms and similes through gamified, interactive lessons.",
+    tags: ["React", "Node.js", "MongoDB", "Express"],
+    image: "/idiom_similies.png.png",
+    color: "from-cyan-500/20 to-teal-500/20",
+    border: "border-cyan-500/20",
   },
   {
-    title: "MedTrack — Healthcare Portal",
-    category: "Healthcare",
+    id: 3,
+    title: "Burqora E-Commerce",
+    category: "Development",
     description:
-      "A HIPAA-compliant patient management portal with appointment scheduling, real-time notifications, and telehealth integration.",
-    tags: ["Next.js", "PostgreSQL", "WebSockets", "AWS"],
-    color: "from-violet-900/60 to-purple-900/60",
-    accent: "#8b5cf6",
-    bars: [75, 60, 90, 40, 80],
+      "An elegant and highly performant e-commerce storefront tailored for high-end fashion, featuring headless architecture and a seamless checkout flow.",
+    tags: ["Next.js", "Shopify", "Framer Motion", "Stripe"],
+    image: "/Burqora.png",
+    color: "from-violet-500/20 to-purple-500/20",
+    border: "border-violet-500/20",
   },
   {
-    title: "Launchpad — Startup Platform",
-    category: "Platform",
+    id: 4,
+    title: "Tes Pire Dashboard",
+    category: "Development",
     description:
-      "An investor-matching platform for early-stage startups, featuring pitch decks, metrics dashboards, and secure deal-rooms.",
-    tags: ["Vue.js", "Firebase", "Algolia", "Figma"],
-    color: "from-rose-900/60 to-pink-900/60",
-    accent: "#f43f5e",
-    bars: [55, 85, 65, 75, 60],
+      "A modern SaaS analytics dashboard for monitoring enterprise testing environments efficiently, featuring real-time data visualization.",
+    tags: ["Vue.js", "Firebase", "Chart.js", "TailwindCSS"],
+    image: "/Tes Pire.png",
+    color: "from-rose-500/20 to-pink-500/20",
+    border: "border-rose-500/20",
   },
 ];
 
-function MockPreview({
-  accent,
-  color,
-  index,
-  bars,
+function Card({
+  project,
+  i,
+  progress,
+  range,
+  targetScale,
 }: {
-  accent: string;
-  color: string;
-  index: number;
-  bars: number[];
+  project: (typeof projectsData)[0];
+  i: number;
+  progress: any;
+  range: number[];
+  targetScale: number;
 }) {
+  const containerRef = useRef(null);
+  const scale = useTransform(progress, range, [1, targetScale]);
+  const opacity = useTransform(progress, range, [1, 0.5]);
+
   return (
     <div
-      className={`relative rounded-2xl overflow-hidden border border-white/[0.07] h-52 sm:h-64 bg-gradient-to-br ${color}`}
+      ref={containerRef}
+      className="h-screen flex items-center justify-center sticky top-0"
     >
-      {/* Background grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px]" />
+      <motion.div
+        style={{
+          scale,
+          opacity,
+          top: `calc(10vh + ${i * 25}px)`,
+        }}
+        className={`relative w-full max-w-5xl rounded-3xl overflow-hidden border border-slate-400/20 bg-[#0a0a1a]/80 backdrop-blur-xl p-6 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.5)]`}
+      >
+        {/* Background Glow */}
+        <div
+          className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-30 pointer-events-none`}
+        />
 
-      {/* Glow blob */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full blur-3xl opacity-25"
-        style={{ background: accent }}
-      />
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
+          {/* Text Content */}
+          <div className="flex flex-col gap-5 order-2 md:order-1">
+            <div className="inline-flex w-fit items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-xs font-semibold tracking-wide uppercase text-slate-300">
+              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+              {project.category}
+            </div>
 
-      {/* Mock UI chrome */}
-      <div className="absolute inset-3 rounded-xl border border-white/[0.08] bg-black/30 backdrop-blur-sm overflow-hidden flex flex-col">
-        {/* Window chrome */}
-        <div className="flex items-center gap-1.5 px-3 py-2.5 border-b border-white/[0.06]">
-          <div className="w-2 h-2 rounded-full bg-white/20" />
-          <div className="w-2 h-2 rounded-full bg-white/15" />
-          <div className="w-2 h-2 rounded-full bg-white/10" />
-          <div className="flex-1 mx-3 h-4 rounded bg-white/[0.06] flex items-center px-2">
-            <span className="text-[8px] text-white/20 font-mono">nexorastudio.com</span>
-          </div>
-        </div>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+              {project.title}
+            </h3>
 
-        {/* Mock content area */}
-        <div className="flex-1 p-3 flex flex-col gap-2">
-          {/* Header bar */}
-          <div className="flex items-center gap-2">
-            <div className="h-5 w-5 rounded" style={{ background: `${accent}40` }} />
-            <div className="h-2 w-20 rounded-full bg-white/10" />
-            <div className="ml-auto h-5 w-12 rounded" style={{ background: `${accent}25` }} />
-          </div>
+            <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-md">
+              {project.description}
+            </p>
 
-          {/* Content rows */}
-          <div className="flex gap-2 flex-1">
-            {/* Sidebar */}
-            <div className="w-12 flex flex-col gap-1.5 pt-1">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="h-2 rounded-full"
-                  style={{
-                    background: i === 0 ? `${accent}50` : "rgba(255,255,255,0.06)",
-                    width: i === 0 ? "80%" : `${60 + i * 5}%`,
-                  }}
-                />
+            <div className="flex flex-wrap gap-2 mt-2">
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 bg-white/[0.04] text-slate-300"
+                >
+                  {tag}
+                </span>
               ))}
             </div>
 
-            {/* Main content */}
-            <div className="flex-1 flex flex-col gap-2">
-              {/* Bar chart */}
-              <div className="flex items-end gap-1 h-14 px-1">
-                {bars.map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 rounded-sm opacity-70"
-                    style={{
-                      height: `${h}%`,
-                      background: `linear-gradient(to top, ${accent}80, ${accent}30)`,
-                    }}
-                  />
-                ))}
-              </div>
-              {/* Table rows */}
-              {Array.from({ length: 2 }).map((_, i) => (
-                <div key={i} className="flex gap-1">
-                  <div className="h-2 flex-1 rounded-full bg-white/[0.06]" />
-                  <div className="h-2 w-8 rounded-full bg-white/[0.04]" />
-                </div>
-              ))}
-            </div>
+            <button className="mt-4 w-fit inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] group">
+              View Case Study
+              <ArrowUpRight
+                size={18}
+                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+              />
+            </button>
+          </div>
+
+          {/* Image Container */}
+          <div className="order-1 md:order-2 h-[250px] sm:h-[350px] md:h-[450px] w-full rounded-2xl overflow-hidden relative border border-white/10 bg-black/40 group">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            />
           </div>
         </div>
-      </div>
-
-      {/* Project number */}
-      <div className="absolute bottom-5 right-5 text-5xl font-black opacity-[0.07] select-none">
-        {String(index + 1).padStart(2, "0")}
-      </div>
+      </motion.div>
     </div>
   );
 }
 
-function ProjectItem({
-  project,
-  index,
-}: {
-  project: (typeof projects)[0];
-  index: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
-  const isEven = index % 2 === 0;
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      className="relative grid md:grid-cols-2 gap-6 md:gap-10 items-center group"
-    >
-      {/* Timeline dot — desktop only, centered between columns */}
-      <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-0 bottom-0 flex-col items-center pointer-events-none z-10">
-        <div
-          className="w-3 h-3 rounded-full border-2 mt-6 transition-all duration-300 group-hover:scale-150"
-          style={{
-            borderColor: project.accent,
-            boxShadow: `0 0 10px ${project.accent}60`,
-          }}
-        />
-      </div>
-
-      {/* Mobile accent bar */}
-      <div
-        className="md:hidden absolute left-0 top-0 bottom-0 w-0.5 rounded-full opacity-40"
-        style={{ background: project.accent }}
-      />
-
-      {/* Text content */}
-      <div className={`pl-4 md:pl-0 ${isEven ? "md:order-1" : "md:order-2"}`}>
-        <span className="inline-block text-xs font-semibold tracking-widest uppercase text-slate-500 mb-3">
-          {project.category}
-        </span>
-        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4 group-hover:text-blue-200 transition-colors leading-tight">
-          {project.title}
-        </h3>
-        <p className="text-slate-400 leading-relaxed mb-5 text-sm sm:text-base">
-          {project.description}
-        </p>
-        <div className="flex flex-wrap gap-2 mb-5">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-3 py-1 rounded-lg text-xs font-medium border bg-white/[0.04] border-white/10 text-slate-300"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <button
-          className="inline-flex items-center gap-2 text-sm font-semibold transition-colors group/btn"
-          style={{ color: project.accent }}
-        >
-          View Case Study
-          <ArrowUpRight
-            size={16}
-            className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform"
-          />
-        </button>
-      </div>
-
-      {/* Preview image */}
-      <div className={`pl-4 md:pl-0 ${isEven ? "md:order-2" : "md:order-1"}`}>
-        <MockPreview
-          accent={project.accent}
-          color={project.color}
-          index={index}
-          bars={project.bars}
-        />
-      </div>
-    </motion.div>
-  );
-}
-
 export default function Projects() {
+  const [activeTab, setActiveTab] = useState("All");
   const containerRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-  const inView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  // Filter projects based on active tab
+  const filteredProjects = projectsData.filter((p) =>
+    activeTab === "All" ? true : p.category === activeTab
+  );
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start center", "end center"],
+    offset: ["start start", "end end"],
   });
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="projects" ref={sectionRef} className="relative isolate py-16 sm:py-24 lg:py-32 px-4 sm:px-6">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-      </div>
-
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-12 sm:mb-16 md:mb-20"
-        >
-          <p className="text-sm font-semibold tracking-widest uppercase text-blue-400 mb-3">
-            Our Work
-          </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            Featured Projects
-          </h2>
-        </motion.div>
-
-        <div ref={containerRef} className="relative">
-          {/* Desktop center timeline line */}
-          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-white/[0.06]">
-            <motion.div
-              className="w-full bg-gradient-to-b from-blue-500 to-cyan-500 origin-top rounded-full"
-              style={{ height: lineHeight }}
-            />
+    <section
+      id="projects"
+      className="relative isolate py-24 sm:py-32 px-4 sm:px-6 bg-[#03030a]"
+    >
+      <div className="max-w-7xl mx-auto">
+        {/* Header & Tabs */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 sm:mb-24">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold tracking-widest uppercase text-blue-400 mb-3">
+              Our Portfolio
+            </p>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
+              Selected Works
+            </h2>
+            <p className="text-slate-400 text-lg">
+              We engineer scalable platforms and design premium digital experiences
+              that drive real business results.
+            </p>
           </div>
 
-          <div className="flex flex-col gap-12 md:gap-20">
-            {projects.map((project, i) => (
-              <ProjectItem key={project.title} project={project} index={i} />
+          {/* Tabs */}
+          <div className="flex items-center gap-1 p-1.5 rounded-2xl bg-white/[0.03] border border-white/[0.08] w-fit">
+            {tabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`relative px-5 py-2.5 rounded-xl text-sm font-medium transition-colors duration-300 ${
+                  activeTab === tab
+                    ? "text-white"
+                    : "text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                {activeTab === tab && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 bg-white/10 border border-white/10 rounded-xl"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10">{tab}</span>
+              </button>
             ))}
           </div>
+        </div>
+
+        {/* Sticky Stack Cards Container */}
+        <div ref={containerRef} className="relative mt-10">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.length > 0 ? (
+              filteredProjects.map((project, i) => {
+                const targetScale = 1 - (filteredProjects.length - i) * 0.04;
+                return (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Card
+                      i={i}
+                      project={project}
+                      progress={scrollYProgress}
+                      range={[i * (1 / filteredProjects.length), 1]}
+                      targetScale={targetScale}
+                    />
+                  </motion.div>
+                );
+              })
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="w-full py-32 flex flex-col items-center justify-center border border-white/10 rounded-3xl bg-white/[0.02]"
+              >
+                <p className="text-slate-400 text-lg">
+                  No projects available in this category yet.
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>
   );
 }
-
