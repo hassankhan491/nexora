@@ -1,6 +1,7 @@
 "use client";
 
 import { GitFork, Send, Link2 } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -40,12 +41,9 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="text-2xl font-bold mb-3 block"
+              className="mb-4 block"
             >
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Nexora
-              </span>
-              <span className="text-white/60 ml-1">Studio</span>
+              <Image src="/logo.png" alt="Nexora Studio" width={140} height={140} className="w-28 h-auto object-contain" />
             </button>
             <p className="text-slate-500 text-sm leading-relaxed max-w-xs">
               A premium web development &amp; design agency crafting fast,

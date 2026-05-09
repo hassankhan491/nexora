@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const links = [
   { label: "About", href: "#about" },
@@ -42,15 +43,12 @@ export default function Navbar() {
             : "bg-transparent"
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-xl font-bold tracking-tight text-white group"
+            className="flex items-center mt-3"
           >
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Nexora
-            </span>
-            <span className="text-white/70 ml-1">Studio</span>
+            <Image src="/logo.png" alt="Nexora Studio" width={140} height={140} className="w-24 md:w-28 h-auto object-contain" priority />
           </button>
 
           <nav className="hidden md:flex items-center gap-7">

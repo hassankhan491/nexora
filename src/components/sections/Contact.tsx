@@ -25,10 +25,30 @@ export default function Contact() {
     e.preventDefault();
     setStatus("sending");
     try {
-      await new Promise((r) => setTimeout(r, 1400));
-      setStatus("sent");
-      setForm({ name: "", email: "", message: "" });
-    } catch {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "eb4130e0-dc13-48e5-ad2e-c969ac5a97f9",
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      });
+      
+      const result = await response.json();
+      if (result.success) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        console.error("Web3Forms Error:", result);
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error("Fetch Error:", error);
       setStatus("error");
     }
   };
