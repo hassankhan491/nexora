@@ -76,15 +76,12 @@ function Card({
   const opacity = useTransform(progress, range, [1, 0.5]);
 
   return (
-    <div
-      ref={containerRef}
-      className="h-screen flex items-center justify-center sticky top-0"
-    >
+    <div className="w-full relative z-10 flex items-center justify-center">
       <motion.div
         style={{
           scale,
           opacity,
-          top: `calc(10vh + ${i * 25}px)`,
+          top: `calc(5vh + ${i * 30}px)`,
         }}
         className={`relative w-full max-w-5xl rounded-3xl overflow-hidden border border-slate-400/20 bg-[#0a0a1a]/80 backdrop-blur-xl p-6 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.5)]`}
       >
@@ -124,7 +121,7 @@ function Card({
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 w-fit inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/10 bg-white/[0.05] backdrop-blur-xl text-white font-semibold text-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.1] hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] group relative overflow-hidden"
+              className="mt-4 relative z-50 w-fit inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/10 bg-white/[0.05] backdrop-blur-xl text-white font-semibold text-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.1] hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] group overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-out" />
               <span className="relative z-10 flex items-center gap-2">
@@ -214,8 +211,8 @@ export default function Projects() {
         </div>
 
         {/* Sticky Stack Cards Container */}
-        <div ref={containerRef} className="relative mt-10">
-          <AnimatePresence mode="popLayout">
+        <div ref={containerRef} className="relative mt-10 flex flex-col">
+          <AnimatePresence mode="wait">
             {filteredProjects.length > 0 ? (
               filteredProjects.map((project, i) => {
                 const targetScale = 1 - (filteredProjects.length - i) * 0.04;
@@ -226,6 +223,8 @@ export default function Projects() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ duration: 0.5 }}
+                    className="sticky top-0 h-screen flex items-center justify-center w-full"
+                    style={{ zIndex: i }}
                   >
                     <Card
                       i={i}
