@@ -18,6 +18,7 @@ const projectsData = [
     image: "/GSC-gradient.png",
     color: "from-blue-500/20 to-indigo-500/20",
     border: "border-blue-500/20",
+    link: "https://gradient-cont.com/",
   },
   {
     id: 2,
@@ -29,6 +30,7 @@ const projectsData = [
     image: "/idiom_similies.png.png",
     color: "from-cyan-500/20 to-teal-500/20",
     border: "border-cyan-500/20",
+    link: "https://idiomsimile.com/",
   },
   {
     id: 3,
@@ -40,6 +42,7 @@ const projectsData = [
     image: "/Burqora.png",
     color: "from-violet-500/20 to-purple-500/20",
     border: "border-violet-500/20",
+    link: "https://burqora.io/",
   },
   {
     id: 4,
@@ -51,6 +54,7 @@ const projectsData = [
     image: "/Tes Pire.png",
     color: "from-rose-500/20 to-pink-500/20",
     border: "border-rose-500/20",
+    link: "https://tes-pire.com/",
   },
 ];
 
@@ -116,13 +120,21 @@ function Card({
               ))}
             </div>
 
-            <button className="mt-4 w-fit inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] group">
-              View Case Study
-              <ArrowUpRight
-                size={18}
-                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-              />
-            </button>
+            <a 
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 w-fit inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/10 bg-white/[0.05] backdrop-blur-xl text-white font-semibold text-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.1] hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] group relative overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-out" />
+              <span className="relative z-10 flex items-center gap-2">
+                View Project
+                <ArrowUpRight
+                  size={18}
+                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                />
+              </span>
+            </a>
           </div>
 
           {/* Image Container */}
