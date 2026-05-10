@@ -169,7 +169,7 @@ export default function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative py-12 sm:py-32 px-4 sm:px-6 bg-[#03030a] min-h-screen"
+      className="relative py-12 sm:py-32 px-4 sm:px-6 bg-transparent min-h-screen"
     >
       <div className="max-w-7xl mx-auto relative">
         {/* Header */}
