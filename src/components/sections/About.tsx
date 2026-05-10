@@ -36,7 +36,7 @@ const pillars = [
 ];
 
 const techStack = [
-  "Next.js", "React", "TypeScript", "Node.js", "TailwindCSS",
+  "HTML", "CSS", "Vanilla JS", "Next.js", "React", "TypeScript", "Node.js", "TailwindCSS",
   "Prisma", "PostgreSQL", "Figma", "Framer Motion", "Stripe", "AWS", "Vercel",
 ];
 
