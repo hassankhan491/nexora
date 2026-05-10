@@ -14,11 +14,11 @@ export default function Contact() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", service: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,6 +35,7 @@ export default function Contact() {
           access_key: "9e91f04d-d911-4e42-856a-f52e373e80ac",
           name: form.name,
           email: form.email,
+          service: form.service,
           message: form.message,
         }),
       });
@@ -42,7 +43,7 @@ export default function Contact() {
       const result = await response.json();
       if (result.success) {
         setStatus("sent");
-        setForm({ name: "", email: "", message: "" });
+        setForm({ name: "", email: "", service: "", message: "" });
       } else {
         console.error("Web3Forms Error:", result);
         setStatus("error");
@@ -157,6 +158,31 @@ export default function Contact() {
                   className="w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-slate-200 placeholder-slate-600 outline-none text-sm transition-all duration-200 focus:border-blue-500/60 focus:ring-2 focus:ring-blue-500/20 focus:bg-blue-500/[0.04]"
                 />
               </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="service"
+                className="block text-sm font-medium text-slate-400 mb-2"
+              >
+                Service
+              </label>
+              <select
+                id="service"
+                name="service"
+                required
+                value={form.service}
+                onChange={handleChange}
+                className="w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-slate-200 outline-none text-sm transition-all duration-200 focus:border-blue-500/60 focus:ring-2 focus:ring-blue-500/20 focus:bg-blue-500/[0.04] appearance-none"
+              >
+                <option value="" disabled className="bg-[#03030a]">Select a service</option>
+                <option value="Web Development" className="bg-[#03030a]">Web Development</option>
+                <option value="UI / UX Design" className="bg-[#03030a]">UI / UX Design</option>
+                <option value="E-commerce" className="bg-[#03030a]">E-commerce</option>
+                <option value="SaaS Products" className="bg-[#03030a]">SaaS Products</option>
+                <option value="Responsive Design" className="bg-[#03030a]">Responsive Design</option>
+                <option value="Maintenance & Support" className="bg-[#03030a]">Maintenance & Support</option>
+              </select>
             </div>
 
             <div>

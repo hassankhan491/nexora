@@ -1,7 +1,7 @@
 "use client";
 
-import { GitFork, Send, Link2 } from "lucide-react";
 import Image from "next/image";
+import SocialLinks from "@/components/ui/SocialLinks";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -21,11 +21,7 @@ const services = [
   "Maintenance & Support",
 ];
 
-const socials = [
-  { icon: GitFork, href: "#", label: "GitHub" },
-  { icon: Send, href: "#", label: "Twitter" },
-  { icon: Link2, href: "#", label: "LinkedIn" },
-];
+
 
 export default function Footer() {
   const scrollTo = (href: string) => {
@@ -49,17 +45,8 @@ export default function Footer() {
               A premium web development &amp; design agency crafting fast,
               beautiful, and scalable digital experiences.
             </p>
-            <div className="flex items-center gap-2.5 mt-5">
-              {socials.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="w-9 h-9 rounded-lg border border-white/[0.07] bg-white/[0.03] flex items-center justify-center text-slate-500 hover:text-white hover:border-blue-500/40 hover:bg-blue-500/10 transition-all duration-200"
-                >
-                  <Icon size={15} />
-                </a>
-              ))}
+            <div className="mt-5">
+              <SocialLinks />
             </div>
           </div>
 
