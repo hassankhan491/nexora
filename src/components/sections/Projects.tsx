@@ -56,6 +56,30 @@ const projectsData = [
     border: "border-rose-500/20",
     link: "https://tes-pire.com/",
   },
+  {
+    id: 5,
+    title: "Venture Web Design",
+    category: "Designing",
+    description:
+      "Get a professional website for $125 and a FREE LOGO. We deliver high-end, responsive designs that convert visitors into loyal customers.",
+    tags: ["Web Design", "UI/UX", "Branding", "Logo Design"],
+    image: "/venture-design.png",
+    color: "from-purple-600/20 to-pink-600/20",
+    border: "border-purple-500/20",
+    link: "#",
+  },
+  {
+    id: 6,
+    title: "YNC Recruitment Flyer",
+    category: "Designing",
+    description:
+      "A high-impact recruitment flyer designed for YNC to attract top-tier WordPress Developers. Bold, modern, and optimized for social media engagement.",
+    tags: ["Graphic Design", "Branding", "Social Media", "Typography"],
+    image: "/hiring-design.png",
+    color: "from-blue-600/20 to-yellow-600/20",
+    border: "border-blue-500/20",
+    link: "#",
+  },
 ];
 
 function Card({
@@ -64,15 +88,18 @@ function Card({
   progress,
   range,
   targetScale,
+  onViewDesign,
 }: {
   project: (typeof projectsData)[0];
   i: number;
   progress: any;
   range: number[];
   targetScale: number;
+  onViewDesign: (img: string) => void;
 }) {
   const scale = useTransform(progress, range, [1, targetScale]);
   const opacity = useTransform(progress, range, [1, 0.7]);
+  const isDesign = project.category === "Designing";
 
   return (
     <div className="w-full relative z-10 flex items-center justify-center pt-8 sm:pt-32">
@@ -116,25 +143,44 @@ function Card({
               ))}
             </div>
 
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 sm:mt-6 relative z-50 w-fit inline-flex items-center gap-3 px-6 py-3 sm:px-8 sm:py-4 rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl text-white font-bold text-sm transition-all duration-500 hover:-translate-y-1.5 hover:bg-white/[0.08] hover:border-white/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] group overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-out" />
-              <span className="relative z-10 flex items-center gap-2">
-                Launch Project
-                <ArrowUpRight
-                  size={20}
-                  className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
-                />
-              </span>
-            </a>
+            {isDesign ? (
+              <button
+                onClick={() => onViewDesign(project.image)}
+                className="mt-2 sm:mt-6 relative z-50 w-fit inline-flex items-center gap-3 px-6 py-3 sm:px-8 sm:py-4 rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl text-white font-bold text-sm transition-all duration-500 hover:-translate-y-1.5 hover:bg-white/[0.08] hover:border-white/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] group overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-out" />
+                <span className="relative z-10 flex items-center gap-2">
+                  View Full Design
+                  <ArrowUpRight
+                    size={20}
+                    className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+                  />
+                </span>
+              </button>
+            ) : (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 sm:mt-6 relative z-50 w-fit inline-flex items-center gap-3 px-6 py-3 sm:px-8 sm:py-4 rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl text-white font-bold text-sm transition-all duration-500 hover:-translate-y-1.5 hover:bg-white/[0.08] hover:border-white/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] group overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-out" />
+                <span className="relative z-10 flex items-center gap-2">
+                  Launch Project
+                  <ArrowUpRight
+                    size={20}
+                    className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+                  />
+                </span>
+              </a>
+            )}
           </div>
 
           {/* Image Container */}
-          <div className="order-1 md:order-2 h-[240px] sm:h-[380px] md:h-[480px] w-full rounded-[2rem] overflow-hidden relative border border-white/10 bg-black/40 group shadow-2xl">
+          <div
+            onClick={() => isDesign && onViewDesign(project.image)}
+            className={`order-1 md:order-2 h-[240px] sm:h-[380px] md:h-[480px] w-full rounded-[2rem] overflow-hidden relative border border-white/10 bg-black/40 group shadow-2xl ${isDesign ? "cursor-zoom-in" : ""}`}
+          >
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
             <Image
               src={project.image}
@@ -152,6 +198,7 @@ function Card({
 
 export default function Projects() {
   const [activeTab, setActiveTab] = useState("All");
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -181,7 +228,7 @@ export default function Projects() {
             Selected <span className="text-slate-500 italic font-light">Works</span>
           </h2>
           <p className="text-slate-400 text-base max-w-3xl mx-auto font-medium leading-relaxed">
-            Explore a curated showcase of our most defining digital products. Every project in this collection represents our unwavering commitment to pixel-perfect design and sophisticated engineering. These selected works are more than just websites; they are powerful digital assets that have successfully accelerated growth, engaged users, and redefined industry standards for our visionary clients.
+            Explore a curated showcase of our most defining digital products. Every project in this collection represents our unwavering commitment to pixel-perfect design and sophisticated engineering.
           </p>
         </div>
 
@@ -232,6 +279,7 @@ export default function Projects() {
                       progress={scrollYProgress}
                       range={[i * (1 / filteredProjects.length), 1]}
                       targetScale={targetScale}
+                      onViewDesign={setSelectedImage}
                     />
                   </motion.div>
                 );
@@ -250,6 +298,40 @@ export default function Projects() {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 sm:p-10 cursor-zoom-out"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full max-w-5xl aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={selectedImage}
+                alt="Full Design Preview"
+                fill
+                className="object-contain"
+              />
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+              >
+                ✕
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
