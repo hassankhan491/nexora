@@ -106,16 +106,12 @@ function Card({
       <motion.div
         style={{
           scale,
-          opacity,
           top: `calc(5vh + ${i * 20}px)`,
+          backgroundColor: '#03030a',
+          opacity: 1,
         }}
-        className="relative w-full max-w-5xl rounded-[2.5rem] overflow-hidden border border-white/10 bg-[#0a0a1a]/90 backdrop-blur-2xl p-6 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+        className="relative w-full max-w-5xl rounded-[2.5rem] overflow-hidden border border-white/10 p-6 sm:p-10 shadow-[0_40px_80px_rgba(0,0,0,0.9)]"
       >
-        {/* Background Glow */}
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20 pointer-events-none`}
-        />
-
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
           {/* Text Content */}
           <div className="flex flex-col gap-3 sm:gap-6 order-2 md:order-1">
@@ -216,7 +212,7 @@ export default function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative py-12 sm:py-32 px-4 sm:px-6 bg-transparent min-h-screen"
+      className="relative py-12 sm:py-32 px-4 sm:px-6 bg-[#03030a] min-h-screen z-10"
     >
       <div className="max-w-7xl mx-auto relative">
         {/* Header */}
@@ -265,73 +261,73 @@ export default function Projects() {
               filteredProjects.map((project, i) => {
                 const targetScale = 1 - (filteredProjects.length - i) * 0.05;
                 return (
-                  <motion.div
-                    key={`${activeTab}-${project.id}`}
-                    initial={{ opacity: 0, scale: 0.9, y: 100 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
-                    className="sticky top-0 min-h-screen flex items-start justify-center w-full"
-                    style={{ zIndex: i }}
-                  >
-                    <Card
-                      i={i}
-                      project={project}
-                      progress={scrollYProgress}
-                      range={[i * (1 / filteredProjects.length), 1]}
-                      targetScale={targetScale}
-                      onViewDesign={setSelectedImage}
-                    />
-                  </motion.div>
-                );
-              })
-            ) : (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="w-full py-32 flex flex-col items-center justify-center border border-white/10 rounded-[2.5rem] bg-white/[0.02] backdrop-blur-sm"
-              >
-                <p className="text-slate-500 text-lg font-medium">
-                  No projects available in this category yet.
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                    <motion.div
+                      key={`${activeTab}-${project.id}`}
+                      initial={{ opacity: 1, y: 50 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                      className="sticky top-0 min-h-screen flex items-start justify-center w-full"
+                      style={{ zIndex: i + 10 }}
+                    >
+                      <Card
+                        i={i}
+                        project={project}
+                        progress={scrollYProgress}
+                        range={[i * (1 / filteredProjects.length), 1]}
+                        targetScale={targetScale}
+                        onViewDesign={setSelectedImage}
+                      />
+                    </motion.div>
+                  );
+                })
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="w-full py-32 flex flex-col items-center justify-center border border-white/10 rounded-[2.5rem] bg-[#05050f]"
+                >
+                  <p className="text-slate-500 text-lg font-medium">
+                    No projects available in this category yet.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
-      </div>
 
-      {/* Lightbox Modal */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedImage(null)}
-            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 sm:p-10 cursor-zoom-out"
-          >
+        {/* Lightbox Modal */}
+        <AnimatePresence>
+          {selectedImage && (
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-5xl aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10"
-              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedImage(null)}
+              className="fixed inset-0 z-[200] flex items-center justify-center bg-black p-4 sm:p-10 cursor-zoom-out"
             >
-              <Image
-                src={selectedImage}
-                alt="Full Design Preview"
-                fill
-                className="object-contain"
-              />
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="relative w-full max-w-5xl aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-black"
+                onClick={(e) => e.stopPropagation()}
               >
-                ✕
-              </button>
+                <Image
+                  src={selectedImage}
+                  alt="Full Design Preview"
+                  fill
+                  className="object-contain"
+                />
+                <button
+                  onClick={() => setSelectedImage(null)}
+                  className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+                >
+                  ✕
+                </button>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </section>
+          )}
+        </AnimatePresence>
+      </section>
   );
 }
